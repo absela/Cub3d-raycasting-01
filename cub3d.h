@@ -32,7 +32,7 @@ typedef struct s_map{
 typedef struct s_ply{
     double player_pos_x;
     double player_pos_y;
-    int     field_of_view;
+    double     field_of_view;
     double  ply_angle;
     int walk_direction;
     int turn_direction;
@@ -78,5 +78,10 @@ void    cast_all_rays(t_mlx *mlx);
 double  angl_limit(double ra);
 void    test_rays(t_mlx *mlx);
 double to_radian(double n);
+void    sky(t_mlx *mlx);
+void    floorxx(t_mlx *mlx);
+void rend_3D(t_mlx *mlx);
+void	render_slice(t_mlx *mlx, int slice, int x);
+void	render_walls3d(t_mlx *mlx);
 
 #endif

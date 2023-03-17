@@ -34,10 +34,32 @@ double to_radian(double n)
 	return (n * M_PI / 180);
 }
 
+// void dda(t_mlx *data, double X0, double Y0, double X1, double Y1, double angle, double scale,int color)
+// {
+// 	angle = 0;
+// 	scale = 0;
+//     double dx = X1 - X0;
+//     double dy = Y1 - Y0;
+
+//     double steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy);
+//     //printf("steps is : %f\n",steps);
+//     double Xinc = dx / (double)steps;
+//     double Yinc = dy / (double)steps;
+//     for (int i = 0; i <= steps; i++)
+//     {
+//         my_mlx_pixel_put(data->img,X0,Y0,color);
+//         X0 += Xinc;
+//         Y0 += Yinc;
+//     }
+// }
+
+
 void dda(t_mlx *data, double X0, double Y0, double X1, double Y1, double angle, double scale,int color)
 {
-	angle = 0;
-	scale = 0;
+    X1 = X1 + cos(angle) *scale;
+    Y1 = Y1 + sin(angle) * scale;
+    // printf("The X1 is : %f\n",X1/40);
+    // printf("The Y1 is : %f\n",Y1/40);
     double dx = X1 - X0;
     double dy = Y1 - Y0;
 

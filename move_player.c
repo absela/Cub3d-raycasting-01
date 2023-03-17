@@ -6,7 +6,7 @@
 /*   By: absela <absela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 02:51:08 by absela            #+#    #+#             */
-/*   Updated: 2023/03/15 05:17:45 by absela           ###   ########.fr       */
+/*   Updated: 2023/03/17 05:44:25 by absela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int on_keydown(int keycode, t_mlx *mlx)
 {
     if (keycode == 13)
-        mlx->ply->walk_direction = -1;
-    if (keycode == 1)
         mlx->ply->walk_direction = 1;
+    if (keycode == 1)
+        mlx->ply->walk_direction = -1;
     if (keycode == 124)
         mlx->ply->turn_direction = 1;
     if (keycode == 123)
@@ -47,7 +47,7 @@ double angl_limit(double ra)
 
 void	rotate_player(t_mlx	*mlx)
 {
-	mlx->ply->ply_angle += mlx->ply->turn_direction * TUSPEED;
+	mlx->ply->ply_angle -= mlx->ply->turn_direction * TUSPEED;
 	mlx->ply->ply_angle = angl_limit(mlx->ply->ply_angle); 
 }
 
@@ -58,9 +58,9 @@ void move_ply(t_mlx *mlx)
 
     x = cosf(to_radian(mlx->ply->ply_angle)) * mlx->ply->walk_direction * MVSPEED;
     y = sinf(to_radian(mlx->ply->ply_angle)) * mlx->ply->walk_direction * MVSPEED;
-    if (1)
+    if (mlx->map->map[(int)(mlx->ply->player_pos_y - y) / TILE][(int)(mlx->ply->player_pos_x + x) / TILE] != '1')
     {
         mlx->ply->player_pos_x += x;
-        mlx->ply->player_pos_y += y;
+        mlx->ply->player_pos_y -= y;
     }
 }
