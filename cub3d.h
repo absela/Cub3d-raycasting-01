@@ -11,8 +11,10 @@
 
 
 #define TILE 32
-#define MVSPEED 3
-#define TUSPEED 5
+#define MVSPEED 4
+#define TUSPEED 3
+#define W_WITH 900
+#define W_HEIGHT 600
 
 
 typedef struct	s_data {
@@ -83,5 +85,6 @@ void    floorxx(t_mlx *mlx);
 void rend_3D(t_mlx *mlx);
 void	render_slice(t_mlx *mlx, int slice, int x);
 void	render_walls3d(t_mlx *mlx);
+int     on_mousemove(int x, int y, t_mlx *mlx);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: absela <absela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 07:26:30 by absela            #+#    #+#             */
-/*   Updated: 2023/03/17 05:53:20 by absela           ###   ########.fr       */
+/*   Updated: 2023/03/17 10:45:12 by absela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ double x_intersection(t_mlx *mlx, double ray_ang)
         y_intersection += ya;
     }
     distance = sqrt(pow((mlx->ply->player_pos_x - x_intersection), 2) + pow((mlx->ply->player_pos_y - y_intersection), 2));
-    // dda(mlx, mlx->ply->player_pos_x, mlx->ply->player_pos_y,x_intersection ,y_intersection, 0, 0, 0x00FF00);
+    dda(mlx, mlx->ply->player_pos_x, mlx->ply->player_pos_y,x_intersection ,y_intersection, 0, 0, 0x00FF00);
 
     return (distance);
 }
@@ -99,7 +99,7 @@ double y_intersection(t_mlx *mlx, double ray_ang)
         y_intersection += ya;
     }
     distance = sqrt(pow((mlx->ply->player_pos_x - x_intersection), 2) + pow((mlx->ply->player_pos_y - y_intersection), 2));
-    // dda(mlx, mlx->ply->player_pos_x, mlx->ply->player_pos_y,x_intersection ,y_intersection, 0, 0, 0xFF0000);
+    dda(mlx, mlx->ply->player_pos_x, mlx->ply->player_pos_y,x_intersection ,y_intersection, 0, 0, 0xFF0000);
     return (distance);
 }
 

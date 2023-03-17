@@ -72,5 +72,6 @@ void dda(t_mlx *data, double X0, double Y0, double X1, double Y1, double angle, 
         my_mlx_pixel_put(data->img,X0,Y0,color);
         X0 += Xinc;
         Y0 += Yinc;
+		sleep(1);
     }
 }

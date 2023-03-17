@@ -6,7 +6,7 @@
 /*   By: absela <absela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 02:16:01 by absela            #+#    #+#             */
-/*   Updated: 2023/03/17 05:31:53 by absela           ###   ########.fr       */
+/*   Updated: 2023/03/17 10:34:58 by absela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,17 @@ void init_ply(t_mlx *mlx)
     pos_ply(mlx);
     mlx->ply->field_of_view = 60;
     mlx->ply->ply_angle = 90;
+    mlx->ply->turn_direction = 0;
+    mlx->ply->walk_direction = 0;
 }
 
+int on_mousemove(int x, int y, t_mlx *mlx)
+{
+    (void)y;
+    mlx->ply->ply_angle = (double)(x * 0.09);
+    mlx->ply->ply_angle = angl_limit(mlx->ply->ply_angle);
+    return (0);
+}
 
 
 void init_all(t_mlx **mlx, char **av)
@@ -60,15 +69,15 @@ void init_all(t_mlx **mlx, char **av)
     (*mlx)->img = malloc(sizeof(t_data));
     (*mlx)->ply = malloc(sizeof(t_ply));
     (*mlx)->map->map = r_map(av[1]);
+    init_ply(*mlx);
     (*mlx)->mlx = mlx_init();
     (*mlx)->map->map_width = ft_strlen((*mlx)->map->map[0]);
     (*mlx)->map->map_height = map_height((*mlx)->map->map);
-    init_ply(*mlx);
-    (*mlx)->win_width = 1000;
-    (*mlx)->win_height = 500;
+    (*mlx)->win_width = W_WITH;
+    (*mlx)->win_height = W_HEIGHT;
     (*mlx)->angle_btw_rays = (*mlx)->ply->field_of_view / (double)(*mlx)->win_width;
     (*mlx)->pro_plane = ((*mlx)->win_width / 2) / tan(to_radian((*mlx)->ply->field_of_view / 2));
     (*mlx)->mlx_win = mlx_new_window((*mlx)->mlx, (*mlx)->win_width, (*mlx)->win_height, "cub3d");
-    (*mlx)->img->img = mlx_new_image((*mlx)->mlx, (*mlx)->map->map_width * TILE, (*mlx)->map->map_height * TILE);
+    (*mlx)->img->img = mlx_new_image((*mlx)->mlx, (*mlx)->win_width, (*mlx)->win_height);
     (*mlx)->img->addr = mlx_get_data_addr((*mlx)->img->img, &(*mlx)->img->bits_per_pixel, &(*mlx)->img->line_length, &(*mlx)->img->endian);
 }
