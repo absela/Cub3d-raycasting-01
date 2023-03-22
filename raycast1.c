@@ -6,7 +6,7 @@
 /*   By: absela <absela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 07:26:30 by absela            #+#    #+#             */
-/*   Updated: 2023/03/17 10:45:12 by absela           ###   ########.fr       */
+/*   Updated: 2023/03/20 15:16:52 by absela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int get_ray_angle(double ray_ang, int flag)
     }
 }
 
-double x_intersection(t_mlx *mlx, double ray_ang)
+double x_intersection(t_mlx *mlx, double ray_ang, t_test    *pos)
 {
     int check;
     double xa;
     double ya;
-    double y_intersection = 0;
-    double x_intersection = 0;
+    // double y_intersection;
+    // double x_intersection;
     double distance;
 
     check = get_ray_angle(ray_ang, 1);
@@ -48,58 +48,55 @@ double x_intersection(t_mlx *mlx, double ray_ang)
         return (HUGE_VALF);
     distance = 0;
     ya = TILE * check;
-    xa = ya / -tanf(to_radian(ray_ang));
+    xa = ya / -tan(to_radian(ray_ang));
     if (check != -1)
-        y_intersection = (floor(mlx->ply->player_pos_y / TILE) * TILE) + TILE;
+        pos->y_inter = (floor(mlx->ply->player_pos_y / TILE) * TILE) + TILE;
     else
-        y_intersection = (floor(mlx->ply->player_pos_y / TILE) * TILE);
-    x_intersection = mlx->ply->player_pos_x + (mlx->ply->player_pos_y - y_intersection) / tan(to_radian(ray_ang));
-    if(x_intersection < 0 || x_intersection > mlx->map->map_width * TILE || y_intersection < 0 || y_intersection > mlx->map->map_height * TILE)
+        pos->y_inter = (floor(mlx->ply->player_pos_y / TILE) * TILE);
+    pos->x_inter = mlx->ply->player_pos_x + (mlx->ply->player_pos_y - pos->y_inter) / tan(to_radian(ray_ang));
+    if(pos->x_inter < 0 || pos->x_inter > mlx->map->map_width * TILE || pos->y_inter < 0 || pos->y_inter > mlx->map->map_height * TILE)
         return (HUGE_VALF);
     if(check == -1)
-        y_intersection -= 1;
-    while ((x_intersection / TILE) > - 1 &&  (x_intersection / TILE) < mlx->map->map_width && mlx->map->map[(int)(y_intersection / TILE)][(int)(x_intersection / TILE)] != '1')
+        pos->y_inter -= 1;
+    while ((pos->x_inter / TILE) > - 1 &&  (pos->x_inter / TILE) < mlx->map->map_width && mlx->map->map[(int)(pos->y_inter / TILE)][(int)(pos->x_inter / TILE)] != '1')
     {
-        x_intersection += xa;
-        y_intersection += ya;
+        pos->x_inter += xa;
+        pos->y_inter += ya;
     }
-    distance = sqrt(pow((mlx->ply->player_pos_x - x_intersection), 2) + pow((mlx->ply->player_pos_y - y_intersection), 2));
-    dda(mlx, mlx->ply->player_pos_x, mlx->ply->player_pos_y,x_intersection ,y_intersection, 0, 0, 0x00FF00);
-
+    distance = sqrt(pow((mlx->ply->player_pos_x - pos->x_inter), 2) + pow((mlx->ply->player_pos_y - pos->y_inter), 2));
+    // dda(mlx, mlx->ply->player_pos_x, mlx->ply->player_pos_y,pos->x_inter ,pos->y_inter, 0, 0, 0x00FF00);
     return (distance);
 }
 
-double y_intersection(t_mlx *mlx, double ray_ang)
+double y_intersection(t_mlx *mlx, double ray_ang, t_test    *pos)
 {
     int check;
     double xa;
     double ya;
-    double y_intersection;
-    double x_intersection;
     double distance;
 
     check = get_ray_angle(ray_ang, 2);
     if (!check)
         return (HUGE_VALF);
     xa = TILE * check;
-    ya = xa * -tanf(to_radian(ray_ang));
+    ya = xa * -tan(to_radian(ray_ang));
     if (check != -1)
-        x_intersection = (floor(mlx->ply->player_pos_x / TILE) * TILE) + TILE;
+        pos->x_inter = (floor(mlx->ply->player_pos_x / TILE) * TILE) + TILE;
     else
-        x_intersection = (floor(mlx->ply->player_pos_x / TILE) * TILE);
-    y_intersection = mlx->ply->player_pos_y + (mlx->ply->player_pos_x - x_intersection) *  tan(to_radian(ray_ang));
+        pos->x_inter = (floor(mlx->ply->player_pos_x / TILE) * TILE);
+    pos->y_inter = mlx->ply->player_pos_y + (mlx->ply->player_pos_x - pos->x_inter) *  tan(to_radian(ray_ang));
     distance = 0;
-    if(x_intersection < 0 || x_intersection > mlx->map->map_width * TILE || y_intersection < 0 || y_intersection > mlx->map->map_height * TILE)
+    if(pos->x_inter < 0 || pos->x_inter > mlx->map->map_width * TILE || pos->y_inter < 0 || pos->y_inter > mlx->map->map_height * TILE)
         return (INFINITY);
     if(check == -1)
-        x_intersection -= 1;
-    while ((y_intersection / TILE) > - 1 &&  (y_intersection / TILE) < mlx->map->map_height && mlx->map->map[(int)(y_intersection / TILE)][(int)(x_intersection / TILE)] != '1')
+        pos->x_inter -= 1;
+    while ((pos->y_inter / TILE) > - 1 &&  (pos->y_inter / TILE) < mlx->map->map_height && mlx->map->map[(int)(pos->y_inter / TILE)][(int)(pos->x_inter / TILE)] != '1')
     {
-        x_intersection += xa;
-        y_intersection += ya;
+        pos->x_inter += xa;
+        pos->y_inter += ya;
     }
-    distance = sqrt(pow((mlx->ply->player_pos_x - x_intersection), 2) + pow((mlx->ply->player_pos_y - y_intersection), 2));
-    dda(mlx, mlx->ply->player_pos_x, mlx->ply->player_pos_y,x_intersection ,y_intersection, 0, 0, 0xFF0000);
+    distance = sqrt(pow((mlx->ply->player_pos_x - pos->x_inter), 2) + pow((mlx->ply->player_pos_y - pos->y_inter), 2));
+    // dda(mlx, mlx->ply->player_pos_x, mlx->ply->player_pos_y,pos->x_inter ,pos->y_inter, 0, 0, 0xFF0000);
     return (distance);
 }
 
@@ -116,21 +113,24 @@ double	normalize_ray(double rl, double ra, t_mlx *data)
 	return (res);
 }
 
-
 double  cast_ray(t_mlx *mlx, double ray_angl)
 {
     double x_distance ;
     double y_distance ;
+    t_test posx;
+    t_test posy;
 
-    x_distance = x_intersection(mlx, ray_angl);
-    y_distance = y_intersection(mlx, ray_angl);
+    x_distance = x_intersection(mlx, ray_angl, &posx);
+    y_distance = y_intersection(mlx, ray_angl, &posy);
     if (y_distance >= x_distance)
     {
-        return (normalize_ray(x_distance, ray_angl, mlx));
+        // dda(mlx, mlx->ply->player_pos_x, mlx->ply->player_pos_y,posx.x ,posx.y, 0, 0, 0xFFFFFF);
+        return(normalize_ray(x_distance, ray_angl, mlx));
     }
     else
     {
-        return (normalize_ray(y_distance, ray_angl, mlx));
+        // dda(mlx, mlx->ply->player_pos_x, mlx->ply->player_pos_y,posy.x ,posy.y, 0, 0, 0xFF0000);
+        return(normalize_ray(y_distance, ray_angl, mlx));
     }
     return (0);
 }
@@ -149,7 +149,6 @@ void cast_all_rays(t_mlx *mlx)
         ray_angl = mlx->ply->ply_angle + (mlx->ply->field_of_view / 2) - (mlx->angle_btw_rays * (double)i);
         ray_angl = angl_limit(ray_angl);
         mlx->rays[i].ray_angle = ray_angl;
-        // printf("i == %d ray angle is ====  %f\n", i, ray_angl);
         mlx->rays[i].distance = cast_ray(mlx, ray_angl);
         i--;
     }

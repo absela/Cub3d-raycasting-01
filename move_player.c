@@ -6,7 +6,7 @@
 /*   By: absela <absela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 02:51:08 by absela            #+#    #+#             */
-/*   Updated: 2023/03/17 08:02:32 by absela           ###   ########.fr       */
+/*   Updated: 2023/03/20 15:14:47 by absela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int on_keydown(int keycode, t_mlx *mlx)
     if (keycode == 1)
         mlx->ply->walk_direction = -1;
     if (keycode == 124)
-        mlx->ply->turn_direction = 1;
-    if (keycode == 123)
         mlx->ply->turn_direction = -1;
+    if (keycode == 123)
+        mlx->ply->turn_direction = 1;
     if (keycode == 53)
         exit(0);
     return (0);
@@ -47,7 +47,7 @@ double angl_limit(double ra)
 
 void	rotate_player(t_mlx	*mlx)
 {
-	mlx->ply->ply_angle -= mlx->ply->turn_direction * TUSPEED;
+	mlx->ply->ply_angle += mlx->ply->turn_direction * TUSPEED;
 	mlx->ply->ply_angle = angl_limit(mlx->ply->ply_angle); 
 }
 

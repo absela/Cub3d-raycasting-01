@@ -56,10 +56,8 @@ double to_radian(double n)
 
 void dda(t_mlx *data, double X0, double Y0, double X1, double Y1, double angle, double scale,int color)
 {
-    X1 = X1 + cos(angle) *scale;
-    Y1 = Y1 + sin(angle) * scale;
-    // printf("The X1 is : %f\n",X1/40);
-    // printf("The Y1 is : %f\n",Y1/40);
+	(void)scale;
+	(void)angle;
     double dx = X1 - X0;
     double dy = Y1 - Y0;
 
@@ -72,6 +70,6 @@ void dda(t_mlx *data, double X0, double Y0, double X1, double Y1, double angle, 
         my_mlx_pixel_put(data->img,X0,Y0,color);
         X0 += Xinc;
         Y0 += Yinc;
-		sleep(1);
+		// usleep(20);
     }
 }

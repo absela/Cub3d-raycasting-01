@@ -34,32 +34,19 @@ void    draw_squaref(int i, int j, t_mlx *mlx)
 	}
 }
 
-void sky(t_mlx *mlx)
+void sky_and_floor(t_mlx *mlx)
 {
 	int x = 0;
 	int y = 0;
 	while(x < mlx->win_width)
 	{
 		y = 0;
-		while(y < mlx->win_height / 2)
-		{
-			my_mlx_pixel_put(mlx->img,x,y, 0x99e6ff);
-			y++;
-		}
-		x++;
-	}
-}
-
-void floorxx(t_mlx *mlx)
-{
-	int x = 0;
-	int y = 0;
-	while(x < mlx->win_width)
-	{
-		y = mlx->win_height / 2;
 		while(y < mlx->win_height)
 		{
-			my_mlx_pixel_put(mlx->img,x,y, 0x8D5B4C);
+			if(y < mlx->win_height / 2)
+				my_mlx_pixel_put(mlx->img,x,y, 0x99e6ff);
+			else
+				my_mlx_pixel_put(mlx->img,x,y, 0x8D5B4C);
 			y++;
 		}
 		x++;
@@ -96,7 +83,7 @@ void	render_slice(t_mlx *mlx, int slice, int x)
 	while (y <= (mlx->win_height / 2) + (slice / 2))
 	{
 		my_mlx_pixel_put(mlx->img, x, y, color);
-		if (y > mlx->win_height)
+		if (y == mlx->win_height)
 			break ;
 		y++;
 	}

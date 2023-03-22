@@ -6,7 +6,7 @@
 #    By: absela <absela@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 01:46:46 by absela            #+#    #+#              #
-#    Updated: 2023/03/17 08:07:11 by absela           ###   ########.fr        #
+#    Updated: 2023/03/22 00:26:34 by absela           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ RM = rm -f
 $(NAME): $(OBJS)
 	cd libft && make
 	cd ..
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) libft/libft.a -lmlx -framework OpenGL -framework AppKit
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) libft/libft.a -lmlx -framework OpenGL -framework AppKit 
 
 all: $(NAME)
 
