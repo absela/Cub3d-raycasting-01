@@ -6,7 +6,7 @@
 /*   By: absela <absela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 12:47:02 by absela            #+#    #+#             */
-/*   Updated: 2023/03/22 02:06:24 by absela           ###   ########.fr       */
+/*   Updated: 2023/03/26 19:30:41 by absela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef struct s_map{
 }				t_map;
 
 typedef struct s_ply{
-	double	player_pos_x;
-	double	player_pos_y;
+	double	ply_x;
+	double	ply_y;
 	double	field_of_view;
 	double	ply_angle;
 	int		walk_direction;
@@ -60,9 +60,16 @@ typedef struct s_ray{
 }				t_ray;
 
 typedef struct s_test{
-	double		x_inter;
-	double		y_inter;
+	double		x;
+	double		y;
 }				t_test;
+
+typedef struct s_cord{
+	double		xa;
+	double		ya;
+	int		check;
+}				t_cord;
+
 
 typedef struct s_mlx{
 	void	*mlx;
@@ -88,8 +95,6 @@ void	rotate_player(t_mlx	*mlx);
 void	cast_all_rays(t_mlx *mlx);
 double	angl_limit(double ra);
 double	to_radian(double n);
-void	sky(t_mlx *mlx);
-void	floorxx(t_mlx *mlx);
 void	sky_and_floor(t_mlx *mlx);
 void	rend_3D(t_mlx *mlx);
 void	render_slice(t_mlx *mlx, int slice, int x);

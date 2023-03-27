@@ -6,7 +6,7 @@
 /*   By: absela <absela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 02:16:01 by absela            #+#    #+#             */
-/*   Updated: 2023/03/22 02:06:20 by absela           ###   ########.fr       */
+/*   Updated: 2023/03/22 03:26:40 by absela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void pos_ply(t_mlx *mlx)
         {
             if (mlx->map->map[i][j] == 'N')
             {
-                mlx->ply->player_pos_x = (double)((j * TILE) + TILE / 2);
-                mlx->ply->player_pos_y = (double)((i * TILE) + TILE / 2);
+                mlx->ply->ply_x = (double)((j * TILE) + TILE / 2);
+                mlx->ply->ply_y = (double)((i * TILE) + TILE / 2);
             }
             j++;
         }
@@ -61,25 +61,6 @@ int on_mousemove(int x, int y, t_mlx *mlx)
     return (0);
 }
 
-// void init_all(t_mlx **mlx, char **av)
-// {
-//     *mlx = malloc(sizeof(t_mlx));
-//     (*mlx)->map = malloc(sizeof(t_map));
-//     (*mlx)->img = malloc(sizeof(t_data));
-//     (*mlx)->ply = malloc(sizeof(t_ply));
-//     (*mlx)->map->map = r_map(av[1]);
-//     init_ply(*mlx);
-//     (*mlx)->mlx = mlx_init();
-//     (*mlx)->map->map_width = ft_strlen((*mlx)->map->map[0]);
-//     (*mlx)->map->map_height = map_height((*mlx)->map->map);
-//     (*mlx)->win_width = W_WITH;
-//     (*mlx)->win_height = W_HEIGHT;
-//     (*mlx)->angle_btw_rays = (*mlx)->ply->field_of_view / (double)(*mlx)->win_width;
-//     (*mlx)->pro_plane = ((*mlx)->win_width / 2) / tan(to_radian((*mlx)->ply->field_of_view / 2));
-//     (*mlx)->mlx_win = mlx_new_window((*mlx)->mlx, (*mlx)->win_width, (*mlx)->win_height, "cub3d");
-//     (*mlx)->img->img = mlx_new_image((*mlx)->mlx, (*mlx)->win_width, (*mlx)->win_height);
-//     (*mlx)->img->addr = mlx_get_data_addr((*mlx)->img->img, &(*mlx)->img->bits_per_pixel, &(*mlx)->img->line_length, &(*mlx)->img->endian);
-// }
 void init_all(t_mlx *mlx, char **av)
 {
     mlx->map = malloc(sizeof(t_map));
@@ -94,7 +75,7 @@ void init_all(t_mlx *mlx, char **av)
     mlx->win_height = W_HEIGHT;
     mlx->angle_btw_rays =  mlx->ply->field_of_view / (double)mlx->win_width;
     mlx->pro_plane =(mlx->win_width / 2) / tan(to_radian(mlx->ply->field_of_view / 2));
-    mlx->mlx_win = mlx_new_window(mlx->mlx,  mlx->win_width,   mlx->win_height, "cub3d");
-    mlx->img->img = mlx_new_image(mlx->mlx,  mlx->win_width,   mlx->win_height);
+    mlx->mlx_win = mlx_new_window(mlx->mlx, mlx->win_width, mlx->win_height, "cub3d");
+    mlx->img->img = mlx_new_image(mlx->mlx, mlx->win_width, mlx->win_height);
     mlx->img->addr = mlx_get_data_addr(mlx->img->img,    &mlx->img->bits_per_pixel,  &mlx->img->line_length,   &mlx->img->endian);
 }
