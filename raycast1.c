@@ -6,7 +6,7 @@
 /*   By: absela <absela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 07:26:30 by absela            #+#    #+#             */
-/*   Updated: 2023/03/26 20:03:01 by absela           ###   ########.fr       */
+/*   Updated: 2023/04/01 02:48:06 by absela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ double x_intersection(t_mlx *mlx, double ray_ang, t_test    *pos, t_cord  *p)
     int check;
 
     check = get_ray_angle(ray_ang, 1);
-    printf("[x]%d %f\n", check, ray_ang);
     if (!check)
         return (HUGE_VALF);
     p->ya = TILE * check;
@@ -70,8 +69,6 @@ double y_intersection(t_mlx *mlx, double ray_ang, t_test    *pos, t_cord *p)
     int check;
 
     check = get_ray_angle(ray_ang, 2);
-    printf("[y]%d %f\n", check, ray_ang);
-    exit(0);
     if (!check)
         return (HUGE_VALF);
     p->xa = TILE * check;

@@ -6,7 +6,7 @@
 /*   By: absela <absela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 02:16:01 by absela            #+#    #+#             */
-/*   Updated: 2023/03/22 03:26:40 by absela           ###   ########.fr       */
+/*   Updated: 2023/04/01 02:47:19 by absela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ void init_all(t_mlx *mlx, char **av)
     mlx->win_width = W_WITH;
     mlx->win_height = W_HEIGHT;
     mlx->angle_btw_rays =  mlx->ply->field_of_view / (double)mlx->win_width;
-    mlx->pro_plane =(mlx->win_width / 2) / tan(to_radian(mlx->ply->field_of_view / 2));
+    mlx->pro_plane = (mlx->win_width / 2) / tan(to_radian(mlx->ply->field_of_view / 2));
     mlx->mlx_win = mlx_new_window(mlx->mlx, mlx->win_width, mlx->win_height, "cub3d");
     mlx->img->img = mlx_new_image(mlx->mlx, mlx->win_width, mlx->win_height);
     mlx->img->addr = mlx_get_data_addr(mlx->img->img,    &mlx->img->bits_per_pixel,  &mlx->img->line_length,   &mlx->img->endian);
-}
+}   
+

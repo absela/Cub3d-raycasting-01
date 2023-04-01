@@ -53,23 +53,6 @@ void sky_and_floor(t_mlx *mlx)
 	}
 }
 
-void rend_3D(t_mlx *mlx)
-{
-	int i = 0;
-	int j;
-	while(mlx->map->map[i])
-	{
-		j = 0;
-		while(mlx->map->map[i][j])
-		{
-			if(mlx->map->map[i][j] == '1')
-				draw_square(i,j,mlx);
-			j++;
-		}
-		i++;
-	}
-}
-
 
 void	render_slice(t_mlx *mlx, int slice, int x)
 {
@@ -99,6 +82,34 @@ void	render_walls3d(t_mlx *mlx)
 	{
 		slice = ((double)TILE / mlx->rays[i].distance) * mlx->pro_plane;
 		render_slice(mlx, slice, i);
+		i++;
+	}
+}
+
+void rend_3D(t_mlx *mlx, int s, int x)
+{
+	int y = (mlx->win_height / 2) - (s / 2);
+	int color = 255;
+	if (y < 0)
+		y = 0;
+	while(y <= (mlx->win_height / 2) + (s / 2))
+	{
+		my_mlx_pixel_put(mlx->img,x,y, color);
+		if (y == mlx->win_height)
+			break ;
+		y++;
+	}
+}
+
+void rendar_3dwall(t_mlx *mlx)
+{
+	int s;
+	int i = 0;
+
+	while(i < mlx->win_width)
+	{
+		s = ((double)TILE / mlx->rays[i].distance) * mlx->pro_plane;
+		rend_3D(mlx, s, i);
 		i++;
 	}
 }

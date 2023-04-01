@@ -6,7 +6,7 @@
 /*   By: absela <absela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 12:47:02 by absela            #+#    #+#             */
-/*   Updated: 2023/03/26 19:30:41 by absela           ###   ########.fr       */
+/*   Updated: 2023/03/31 02:02:24 by absela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define MVSPEED 4
 # define TUSPEED 3
 # define W_WITH 900
-# define W_HEIGHT 600
+# define W_HEIGHT 900
 
 
 typedef struct s_data{
@@ -85,6 +85,7 @@ typedef struct s_mlx{
 }				t_mlx;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	rendar_3dwall(t_mlx *mlx);
 char	**r_map(char *str);
 void	init_all(t_mlx *mlx, char **av);
 int		on_keydown(int keycode, t_mlx *mlx);
@@ -96,7 +97,6 @@ void	cast_all_rays(t_mlx *mlx);
 double	angl_limit(double ra);
 double	to_radian(double n);
 void	sky_and_floor(t_mlx *mlx);
-void	rend_3D(t_mlx *mlx);
 void	render_slice(t_mlx *mlx, int slice, int x);
 void	render_walls3d(t_mlx *mlx);
 int		on_mousemove(int x, int y, t_mlx *mlx);
