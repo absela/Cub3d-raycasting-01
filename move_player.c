@@ -6,7 +6,7 @@
 /*   By: absela <absela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 02:51:08 by absela            #+#    #+#             */
-/*   Updated: 2023/03/31 20:45:51 by absela           ###   ########.fr       */
+/*   Updated: 2023/04/01 05:17:17 by absela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,17 @@ void move_ply(t_mlx *mlx)
 {
     double x;
     double y;
+    int add_x;
+    int add_y;
 
     x = cos(to_radian(mlx->ply->ply_angle)) * mlx->ply->walk_direction * MVSPEED;
     y = sin(to_radian(mlx->ply->ply_angle)) * mlx->ply->walk_direction * MVSPEED;
+    add_x = (mlx->ply->ply_x + x) / TILE;
+    add_y = (mlx->ply->ply_y - y) / TILE;
     if (mlx->map->map[(int)(mlx->ply->ply_y - y) / TILE][(int)(mlx->ply->ply_x + x) / TILE] != '1')
     {
+        if(mlx->map->map[(int)mlx->ply->ply_y / TILE][add_x] == '1' && mlx->map->map[add_y][(int) mlx->ply->ply_x / TILE] == '1')
+            return ;
         mlx->ply->ply_x += x;
         mlx->ply->ply_y -= y;
     }

@@ -6,7 +6,7 @@
 /*   By: absela <absela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 12:47:02 by absela            #+#    #+#             */
-/*   Updated: 2023/03/31 02:02:24 by absela           ###   ########.fr       */
+/*   Updated: 2023/04/01 05:45:38 by absela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "libft/libft.h"
 
 # define TILE 32
-# define MVSPEED 4
+# define MVSPEED 1
 # define TUSPEED 3
 # define W_WITH 900
 # define W_HEIGHT 900

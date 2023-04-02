@@ -6,7 +6,7 @@
 #    By: absela <absela@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 01:46:46 by absela            #+#    #+#              #
-#    Updated: 2023/03/22 00:26:34 by absela           ###   ########.fr        #
+#    Updated: 2023/04/01 05:46:56 by absela           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror 
 
 RM = rm -f
 
